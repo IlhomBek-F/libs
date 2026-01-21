@@ -7,6 +7,7 @@
 .p-inputtext {
     border-radius: 0.5rem;
     border: 1px solid #e5e7eb;
+    width: 100%;
 
     &:focus {
       box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
@@ -21,3 +22,29 @@
   .p-input-icon-left {
     position: relative;
 }
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.p-inputtext {
+  padding-left: 12px;
+
+  &.has-icon {
+    padding-left: 40px;
+  }
+
+  &.invalid {
+    border-color: #ef4444;
+  }
+}
+
+

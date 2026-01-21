@@ -1,17 +1,16 @@
-<div class="flex flex-col gap-1">
+<div class="container">
   @if(label()) {
-  <label class="text-sm font-medium text-gray-700">{{ label() }}</label>
+  <label class="label">{{ label() }}</label>
   }
-  <span class="w-full" [ngClass]="{'p-input-icon-left': icon()}">
+  <span style="width: 100%;" [ngClass]="{'p-input-icon-left': icon()}">
      @if (icon()) {
-       <i class="pi pi-search" [ngClass]="{'absolute top-[12px]': icon()}"></i>
+       <i class="pi pi-search" [ngStyle]="icon() ? { position: 'absolute', top: '12px' } : null"
+></i>
      }
     <input pInputText type="text"
-           class="p-inputtext w-full"
-           [ngClass]="{
-            '!pl-[40px]': icon(),
-            'ng-invalid ng-dirty': required() && !value,
-            }"
+           class="p-inputtext"
+           [class.has-icon]="icon()"
+           [class.invalid]="required() && !value"
            [placeholder]="placeholder()"
            [disabled]="disabled"
            [value]="value"

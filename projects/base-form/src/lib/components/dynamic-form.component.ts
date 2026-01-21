@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormContainer } from '../core/models/question-base';
 
 @Component({
-  selector: 'school-dynamic-form',
+  selector: 'base-form-dynamic-form',
   imports: [
     ReactiveFormsModule,
     DynamicFormFieldComponent,
