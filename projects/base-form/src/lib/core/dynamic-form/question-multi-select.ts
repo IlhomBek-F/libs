@@ -1,4 +1,4 @@
-import { AsyncOptionEnum } from '../enums/async-option.enum';
+import { Observable } from 'rxjs';
 import { OptionTypeEnum } from '../enums/option-type.enum';
 import { QuestionTypeEnum } from '../enums/question-type.enum';
 import { QuestionBase } from './question-base';
@@ -11,7 +11,7 @@ export class QuestionMultiSelect extends QuestionBase {
   optionValue: string;
   options: any[];
   optionType?: OptionTypeEnum;
-  asyncOptionType?: AsyncOptionEnum;
+  asyncOptionObs$?: Observable<any>;
   normalizeValue?: (value: any, options?: any[]) => any
 
   constructor(options: SelectInputOptions) {
@@ -22,7 +22,7 @@ export class QuestionMultiSelect extends QuestionBase {
       this.options = options.options
       this.optionType = options.optionType || OptionTypeEnum.EAGER
       if(this.optionType === OptionTypeEnum.ASYNC) {
-        this.asyncOptionType = options.asyncOptionType
+        this.asyncOptionObs$ = options.asyncOptionObs$
       }
       this.normalizeValue = options.normalizeValue
     }

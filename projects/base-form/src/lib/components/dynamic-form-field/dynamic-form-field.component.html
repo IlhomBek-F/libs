@@ -30,7 +30,7 @@
                              [optionLabel]="$any(question()).optionLabel"
                              [optionValue]="$any(question()).optionValue"
                              [optionType]="$any(question()).optionType"
-                             [asyncOptionType]="$any(question()).asyncOptionType"
+                             [asyncOptionObs$]="$any(question()).asyncOptionObs$"
                              [placeholder]="question().placeholder"
                              [normalizeValue]="$any(question()).normalizeValue"
                              />
@@ -42,7 +42,7 @@
                              [optionValue]="$any(question()).optionValue"
                              [normalizeValue]="$any(question()).normalizeValue"
                              [optionType]="$any(question()).optionType"
-                             [asyncOptionType]="$any(question()).asyncOptionType"
+                             [asyncOptionObs$]="$any(question()).asyncOptionObs$"
                              [required]="question().required"
                              [placeholder]="question().placeholder"/>
       }

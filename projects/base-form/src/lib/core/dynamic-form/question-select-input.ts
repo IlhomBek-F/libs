@@ -1,3 +1,4 @@
+import { Observable } from "rxjs";
 import { AsyncOptionEnum } from "../enums/async-option.enum";
 import { OptionTypeEnum } from "../enums/option-type.enum";
 import { QuestionTypeEnum } from "../enums/question-type.enum";
@@ -6,12 +7,12 @@ import { QuestionBase } from "./question-base";
 
 interface SelectInputOptionsAsync extends SelectInputOptionsBase {
   optionType: OptionTypeEnum.ASYNC;
-  asyncOptionType: AsyncOptionEnum;
+  asyncOptionObs$: Observable<any>;
 }
 
 interface SelectInputOptionsEager extends SelectInputOptionsBase {
   optionType?: OptionTypeEnum.EAGER;
-  asyncOptionType?: never;
+  asyncOptionObs$?: never;
 }
 
 interface SelectInputOptionsBase extends QuestionOptionsModel{
@@ -20,7 +21,7 @@ interface SelectInputOptionsBase extends QuestionOptionsModel{
   optionValue?: string;
   options?: any,
   optionType?: OptionTypeEnum;
-  asyncOptionType?: any;
+  asyncOptionObs$?: Observable<any>;
   normalizeValue?: (options: any, value: any) => any
 }
 
@@ -32,7 +33,7 @@ export class QuestionSelectInput extends QuestionBase {
   optionValue: string;
   options: any[];
   optionType?: OptionTypeEnum;
-  asyncOptionType?: AsyncOptionEnum;
+  asyncOptionObs$?: Observable<any>;
   normalizeValue?: <T = any>(value: any, options?: any) => T
 
   constructor(options: SelectInputOptions) {
@@ -42,7 +43,7 @@ export class QuestionSelectInput extends QuestionBase {
     this.options = options.options
     this.optionType = options.optionType || OptionTypeEnum.EAGER
     if(this.optionType === OptionTypeEnum.ASYNC) {
-      this.asyncOptionType = options.asyncOptionType
+      this.asyncOptionObs$ = options.asyncOptionObs$
     }
     this.normalizeValue = options.normalizeValue
   }

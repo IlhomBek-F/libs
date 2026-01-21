@@ -4,7 +4,8 @@ import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/f
 import { MultiSelectModule } from 'primeng/multiselect';
 import { OptionTypeEnum } from '../../core/enums/option-type.enum';
 import { AsyncOptionEnum } from '../../core/enums/async-option.enum';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { handleAsyncOption } from '../../utils';
 
 const VALUE_ACCESSOR_PROVIDER = {
   provide: NG_VALUE_ACCESSOR,
@@ -30,7 +31,7 @@ export class MultiSelectComponent implements ControlValueAccessor {
   onChangeEmit = output<any>()
   required = input()
   optionType = input<OptionTypeEnum>()
-  asyncOptionType = input<AsyncOptionEnum>()
+  asyncOptionObs$ = input<Observable<any>>()
 
   value: any[] = [];
   disabled = false;
@@ -39,7 +40,7 @@ export class MultiSelectComponent implements ControlValueAccessor {
   // private _messageService = inject(ToastService)
   private _options: any[] = [];
 
-  asyncOptionsPipe$ = computed(() => of([]))
+  asyncOptionsPipe$ = computed(handleAsyncOption.bind(this))
 
   // Callbacks
   onChange = (value: any) => { };

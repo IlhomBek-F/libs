@@ -3,8 +3,9 @@ import { ChangeDetectionStrategy, Component, computed, forwardRef, input, output
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { SelectModule } from 'primeng/select';
 import { OptionTypeEnum } from '../../core/enums/option-type.enum';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { AsyncOptionEnum } from '../../core/enums/async-option.enum';
+import { handleAsyncOption } from '../../utils';
 
 const VALUE_ACCESSOR_PROVIDER = {
       provide: NG_VALUE_ACCESSOR,
@@ -30,7 +31,7 @@ export class SelectInputComponent implements ControlValueAccessor{
    onChangeEmit = output<any>()
    required = input()
    optionType = input<OptionTypeEnum>(OptionTypeEnum.EAGER)
-   asyncOptionType = input<AsyncOptionEnum>()
+   asyncOptionObs$ = input<Observable<any>>()
 
    loading = false;
 
@@ -38,7 +39,7 @@ export class SelectInputComponent implements ControlValueAccessor{
   //  private _messageService = inject(ToastService)
    private _options: any[] = [];
 
-  asyncOptionsPipe$ = computed(() => of([]))
+  asyncOptionsPipe$ = computed(handleAsyncOption.bind(this))
 
    value: any;
    disabled = false;
