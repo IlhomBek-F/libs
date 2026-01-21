@@ -23,7 +23,7 @@ The library is designed to keep form structure, validation logic, and UI renderi
 
 ## 1. Define Form Containers
 
-**orms are defined using containers, which hold one or more question models.**
+**forms are defined using containers, which hold one or more question models.**
 
 ```ts 
 import { QuestionTextInput } from '@ilhombek/base-form';
